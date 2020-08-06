@@ -2,3 +2,28 @@
 2020-08-06 06:01:39,249:INFO:Sorted Backups from backup list
 2020-08-06 06:01:39,393:INFO:RESTORES, 200
 2020-08-06 06:01:39,530:INFO:200, OK Storage Location GET Triggerred
+2020-08-06 07:15:17,804:INFO:GET Backups Successfully Triggerred - Status Code: 200, Retrieved -  58 backups
+2020-08-06 07:15:17,805:INFO:Sorted Backups from backup list
+2020-08-06 07:15:17,997:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:18,071:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:18,176:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:18,299:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:18,416:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:18,637:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:18,740:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:18,870:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:19,013:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:19,092:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:19,332:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:19,481:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:19,558:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:19,729:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:20,073:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:20,340:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:20,503:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:20,596:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:20,750:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:20,868:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:21,009:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:21,177:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 07:15:21,270:INFO:RESTORE Successfully Triggerred, 201

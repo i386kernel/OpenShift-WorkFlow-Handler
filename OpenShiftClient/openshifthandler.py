@@ -1,8 +1,7 @@
-import os
 import enum
 import logging
-import urllib3
 import requests
+import urllib3
 
 # Presets for Logging and urllib3 disable warnings
 logger = logging.getLogger(__name__)
@@ -25,14 +24,15 @@ class Endpoints(str, enum.Enum):
     VELERO_RESTORE = "/apis/velero.io/v1/namespaces/velero/restores/"
     VELERO_STORAGE = "/apis/velero.io/v1/namespaces/velero/backupstoragelocations/"
 
+# Check this Diff
 
 class OpenShiftHandler:
 
     # def __init__(self) -> None:
-    #     self.pr_token = os.getenv("PR_TOKEN")
-    #     self.dr_token = os.getenv("DR_TOKEN")
     #     self.pr_url = os.getenv("PR_URL")
     #     self.dr_url = os.getenv("DR_URL")
+    #     self.pr_token = os.getenv("PR_TOKEN")
+    #     self.dr_token = os.getenv("DR_TOKEN")
     #     self.pr_token_header = {"Authorization": "Bearer " + self.pr_token}
     #     self.dr_token_header = {"Authorization": "Bearer " + self.dr_token}
     #     def set_pr_token_header(self) -> dict:
@@ -52,6 +52,6 @@ class OpenShiftHandler:
 
         for namespace in namespaces:
             podstatus = f"/api/v1/namespaces/{namespace}/pods/"
-            response = requests.get(baseurl + podstatus, headers=headers, verify=False)
+            response = requests.get(baseurl + podstatus, headers=headers, verify=False, timeout=10)
             return response.json()
 

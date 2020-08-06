@@ -20,7 +20,7 @@ def fail_over(schedule: str) -> None:
     }
 
     fo = VeleroHandler()
-    fo.get_backups(fo.dr_url, fo.dr_token_header)
+    fo.get_backups(fo.dr_url, fo.dr_token_header, schedule)
     fo.sort_backups()
     print(fo.restore_scheduled_backups(baseurl=fo.dr_url, headers=fo.dr_token_header, restore_obj=fo_restore_obj))
 

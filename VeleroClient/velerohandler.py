@@ -1,6 +1,6 @@
 import sys
-from OpenShift.OpenShiftClient.openshifthandler import *
-import time
+from OpenShiftClient.openshifthandler import *
+
 
 class VeleroHandler(OpenShiftHandler):
     def __init__(self) -> None:
@@ -10,7 +10,7 @@ class VeleroHandler(OpenShiftHandler):
         self.getallbackups = []
         self.sortedbackups = []
 
-    def get_backups(self, baseurl: str, headers: dict) -> None:
+    def get_backups(self, baseurl: str, headers: dict, schedule: str) -> None:
         """Gets all scheduled backups
        :arg
         baseurl => Openshift Base URL, headers => http Headers
@@ -26,7 +26,7 @@ class VeleroHandler(OpenShiftHandler):
                         f" {len(response.json()['items'])} backups")
             for backup in response.json()['items']:
                 try:
-                    if (backup['metadata']['labels']['velero.io/schedule-name'] == self.scheduleName) and (
+                    if (backup['metadata']['labels']['velero.io/schedule-name'] == schedule) and (
                             backup['status']['phase']) == 'Completed':
                         self.getallbackups.append(backup['metadata']['name'])
                 except KeyError:
@@ -108,7 +108,7 @@ class VeleroHandler(OpenShiftHandler):
             logger.info(f"{response.status_code}, {response.reason} Storage Location GET Triggerred")
             return response.json()
         except Exception as e:
-            print("Error occoured while getting storage location")
+            print(f"Error occoured while getting storage location: {e}")
 
     def change_storage_mode(self):
         """Gets performed restores
