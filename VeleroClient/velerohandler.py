@@ -5,10 +5,8 @@ from OpenShiftClient.openshifthandler import *
 class VeleroHandler(OpenShiftHandler):
     def __init__(self) -> None:
         super().__init__()
-        # self.scheduleName = os.getenv("PR_SCHED")
-        self.scheduleName = "sched-backup-03"
-        self.getallbackups = []
-        self.sortedbackups = []
+        self.all_backups = []
+        # self.sorted_backups = []
 
     def get_backups(self, baseurl: str, headers: dict, schedule: str) -> None:
         """Gets all scheduled backups
@@ -28,7 +26,7 @@ class VeleroHandler(OpenShiftHandler):
                 try:
                     if (backup['metadata']['labels']['velero.io/schedule-name'] == schedule) and (
                             backup['status']['phase']) == 'Completed':
-                        self.getallbackups.append(backup['metadata']['name'])
+                        self.all_backups.append(backup['metadata']['name'])
                 except KeyError:
                     pass
         except Exception as e:
@@ -37,17 +35,19 @@ class VeleroHandler(OpenShiftHandler):
             sys.exit(1)
         return None
 
-    def sort_backups(self) -> None:
+    @property
+    def sort_backups(self) -> list:
         """Sorts the Backups
        :arg
         None
        :returns
         None
        """
-        drbackuplist = self.getallbackups
+        drbackuplist = self.all_backups.copy()
+        logger.info("Sorting Backups from backup list")
         drbackuplist.sort(key=lambda x: x.split("-")[-1])
-        self.sortedbackups = drbackuplist.copy()
-        logger.info("Sorted Backups from backup list")
+        return drbackuplist
+        # self.sorted_backups = drbackuplist.copy()
 
     def restore_scheduled_backups(self, baseurl: str, headers: dict, restore_obj: dict) -> dict or None:
         """Restores sorted backups
@@ -56,10 +56,11 @@ class VeleroHandler(OpenShiftHandler):
          :returns
             None
         """
-        if not self.sortedbackups:
+
+        if not self.sort_backups:
             print("There are no scheduled backups available!!!")
             return
-        for backup in self.sortedbackups:
+        for backup in self.sort_backups:
             restore_obj['metadata']['name'] = f"ro-restored-{backup}"
             restore_obj['spec']['backupName'] = backup
             try:
@@ -69,7 +70,7 @@ class VeleroHandler(OpenShiftHandler):
                     logger.critical(f"ERROR Unable to Restore Backups: {response.status_code}, {response.reason}")
                     print(f"ERROR...Unable to Restore Backups: {response.status_code}, {response.reason}")
                     return
-                logger.info(f"RESTORE Successfully Triggerred, {response.status_code}")
+                logger.info(f"RESTORE Successfully Triggerred ro-restored-{backup}, {response.status_code}")
                 print(f"RO-Restored.... {backup}")
             except Exception as e:
                 print("Error While restoring Backups: ", e)
@@ -126,4 +127,4 @@ class VeleroHandler(OpenShiftHandler):
             :returns
               None
         """
-        pass
+

@@ -21,7 +21,6 @@ def fail_over(schedule: str) -> None:
 
     fo = VeleroHandler()
     fo.get_backups(fo.dr_url, fo.dr_token_header, schedule)
-    fo.sort_backups()
     print(fo.restore_scheduled_backups(baseurl=fo.dr_url, headers=fo.dr_token_header, restore_obj=fo_restore_obj))
 
 
@@ -42,7 +41,6 @@ def failover_test_excercise(schedule: str) -> None:
     fote = VeleroHandler()
     fote.get_backups(fote.dr_url, fote.dr_token_header)
     fote.restore_scheduled_backups(baseurl=fote.dr_url, headers=fote.dr_token_header, restore_obj=fote_restore_obj)
-
 
 def fall_back():
     pass

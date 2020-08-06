@@ -1,29 +1,10 @@
-2020-08-06 06:01:39,247:INFO:GET Backups Successfully Triggerred - Status Code: 200, Retrieved -  56 backups
-2020-08-06 06:01:39,249:INFO:Sorted Backups from backup list
-2020-08-06 06:01:39,393:INFO:RESTORES, 200
-2020-08-06 06:01:39,530:INFO:200, OK Storage Location GET Triggerred
-2020-08-06 07:15:17,804:INFO:GET Backups Successfully Triggerred - Status Code: 200, Retrieved -  58 backups
-2020-08-06 07:15:17,805:INFO:Sorted Backups from backup list
-2020-08-06 07:15:17,997:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:18,071:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:18,176:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:18,299:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:18,416:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:18,637:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:18,740:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:18,870:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:19,013:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:19,092:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:19,332:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:19,481:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:19,558:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:19,729:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:20,073:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:20,340:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:20,503:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:20,596:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:20,750:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:20,868:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:21,009:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:21,177:INFO:RESTORE Successfully Triggerred, 201
-2020-08-06 07:15:21,270:INFO:RESTORE Successfully Triggerred, 201
+2020-08-06 09:00:11,235:INFO:GET Backups Successfully Triggerred - Status Code: 200, Retrieved -  58 backups
+2020-08-06 09:00:11,237:INFO:Sorted Backups from backup list
+2020-08-06 09:00:11,370:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806000001, 201
+2020-08-06 09:00:11,465:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806004501, 201
+2020-08-06 09:00:11,606:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806010001, 201
+2020-08-06 09:00:11,692:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806014501, 201
+2020-08-06 09:00:11,798:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806020001, 201
+2020-08-06 09:00:11,981:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806024501, 201
+2020-08-06 09:00:12,136:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806030001, 201
+2020-08-06 09:39:02,985:ERROR:Error Occourred during Retrieving Backups: , HTTPSConnectionPool(host='192.168.8.53', port=6443): Max retries exceeded with url: /apis/velero.io/v1/namespaces/velero/backups/ (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x0000016FE16D6880>, 'Connection to 192.168.8.53 timed out. (connect timeout=10)'))

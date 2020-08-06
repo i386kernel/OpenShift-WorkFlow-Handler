@@ -48,8 +48,7 @@ class OpenShiftHandler:
         self.pr_token_header = {"Authorization": "Bearer " + self.pr_token}
         self.dr_token_header = {"Authorization": "Bearer " + self.dr_token}
 
-    def get_pod_status(self, baseurl: str, headers: dict, namespaces: list) -> None:
-
+    def get_pod_status(self, baseurl: str, headers: dict, namespaces: list) -> dict or None:
         for namespace in namespaces:
             podstatus = f"/api/v1/namespaces/{namespace}/pods/"
             response = requests.get(baseurl + podstatus, headers=headers, verify=False, timeout=10)
