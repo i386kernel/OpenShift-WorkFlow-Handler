@@ -47,7 +47,6 @@ class VeleroHandler(OpenShiftHandler):
         logger.info("Sorting Backups from backup list")
         drbackuplist.sort(key=lambda x: x.split("-")[-1])
         return drbackuplist
-        # self.sorted_backups = drbackuplist.copy()
 
     def restore_scheduled_backups(self, baseurl: str, headers: dict, restore_obj: dict) -> dict or None:
         """Restores sorted backups
