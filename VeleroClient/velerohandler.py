@@ -6,7 +6,6 @@ class VeleroHandler(OpenShiftHandler):
     def __init__(self) -> None:
         super().__init__()
         self.all_backups = []
-        # self.sorted_backups = []
 
     def get_backups(self, baseurl: str, headers: dict, schedule: str) -> None:
         """Gets all scheduled backups
@@ -20,8 +19,7 @@ class VeleroHandler(OpenShiftHandler):
             if not response.ok:
                 logger.critical(f"ERROR Unable to Retrieve Backups: {response.status_code}, {response.reason}")
                 return
-            logger.info(f"GET Backups Successfully Triggerred - Status Code: {response.status_code}, Retrieved - "
-                        f" {len(response.json()['items'])} backups")
+            logger.info(f"GET Backups Successfully Triggerred - Status Code: {response.status_code}")
             for backup in response.json()['items']:
                 try:
                     if (backup['metadata']['labels']['velero.io/schedule-name'] == schedule) and (
@@ -31,7 +29,7 @@ class VeleroHandler(OpenShiftHandler):
                     pass
         except Exception as e:
             print("Error Occourred during getting Backups: ", e)
-            logger.error(f"Error Occourred during Retrieving Backups: , {e}")
+            logger.debug(f"Error Occourred during Retrieving Backups: , {e}")
             sys.exit(1)
         return None
 
@@ -44,8 +42,7 @@ class VeleroHandler(OpenShiftHandler):
         None
        """
         drbackuplist = self.all_backups.copy()
-        logger.info("Sorting Backups from backup list")
-        drbackuplist.sort(key=lambda x: x.split("-")[-1])
+        drbackuplist.sort(key=lambda so_backup: so_backup.split("-")[-1])
         return drbackuplist
 
     def restore_scheduled_backups(self, baseurl: str, headers: dict, restore_obj: dict) -> dict or None:
@@ -59,6 +56,7 @@ class VeleroHandler(OpenShiftHandler):
         if not self.sort_backups:
             print("There are no scheduled backups available!!!")
             return
+        logger.info("Sorting Backups from backup list")
         for backup in self.sort_backups:
             restore_obj['metadata']['name'] = f"ro-restored-{backup}"
             restore_obj['spec']['backupName'] = backup
@@ -73,7 +71,7 @@ class VeleroHandler(OpenShiftHandler):
                 print(f"RO-Restored.... {backup}")
             except Exception as e:
                 print("Error While restoring Backups: ", e)
-                logger.error(f"Error Occourred while restoring backups: , {e}")
+                logger.debug(f"Error Occourred while restoring backups: {e}")
                 sys.exit(1)
         return None
 

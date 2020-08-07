@@ -5,7 +5,8 @@ import os
 
 def main():
     parser = argparse.ArgumentParser(description='Executes Drills in Openshift Environment with Velero Operator')
-    parser.add_argument('-vd', '--vdrill', help='Perform Drill', type=str, required=True, dest='velero_drill')
+    parser.add_argument('-vd', '--vdrill', help='Perform Drill', type=str, choices=['fo', 'fote', 'sw', 'sb'],
+                        required=True, dest='velero_drill')
     parser.add_argument('-vs', '--vschedule', help='Schedule to Restore', type=str, required=True,
                         dest='velero_schedule_name')
     parser.add_argument('-pu', '--prurl', help='PR URL', type=str, required=False, dest='pr_url')
@@ -24,6 +25,7 @@ def main():
             os.environ[envs[idx]] = argenv
 
     print(argenvs)
+    print(f"This is PR Token {os.environ.get('PR_TOKEN')}")
 
     if args.velero_drill == 'fo':
         drills.fail_over(schedule=args.velero_schedule_name)

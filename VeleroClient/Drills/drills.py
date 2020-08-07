@@ -2,6 +2,10 @@ from VeleroClient.velerohandler import VeleroHandler
 
 
 def pre_checks():
+    # Check for the Velero Operator in DR
+    # Check to see if the Env's are present
+    # Check the provided schedule is available
+    # Check the status of work-loads
     pass
 
 
@@ -39,7 +43,7 @@ def failover_test_excercise(schedule: str) -> None:
     }
 
     fote = VeleroHandler()
-    fote.get_backups(fote.dr_url, fote.dr_token_header)
+    fote.get_backups(fote.dr_url, fote.dr_token_header, schedule)
     fote.restore_scheduled_backups(baseurl=fote.dr_url, headers=fote.dr_token_header, restore_obj=fote_restore_obj)
 
 def fall_back():

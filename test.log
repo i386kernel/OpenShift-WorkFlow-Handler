@@ -1,10 +1,17 @@
-2020-08-06 09:00:11,235:INFO:GET Backups Successfully Triggerred - Status Code: 200, Retrieved -  58 backups
-2020-08-06 09:00:11,237:INFO:Sorted Backups from backup list
-2020-08-06 09:00:11,370:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806000001, 201
-2020-08-06 09:00:11,465:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806004501, 201
-2020-08-06 09:00:11,606:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806010001, 201
-2020-08-06 09:00:11,692:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806014501, 201
-2020-08-06 09:00:11,798:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806020001, 201
-2020-08-06 09:00:11,981:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806024501, 201
-2020-08-06 09:00:12,136:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200806030001, 201
-2020-08-06 09:39:02,985:ERROR:Error Occourred during Retrieving Backups: , HTTPSConnectionPool(host='192.168.8.53', port=6443): Max retries exceeded with url: /apis/velero.io/v1/namespaces/velero/backups/ (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x0000016FE16D6880>, 'Connection to 192.168.8.53 timed out. (connect timeout=10)'))
+2020-08-07 10:27:08,595:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-07 10:27:08,596:INFO:Sorting Backups from backup list
+2020-08-07 10:27:08,695:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807020001, 201
+2020-08-07 10:27:08,799:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807024501, 201
+2020-08-07 10:27:08,932:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807030001, 201
+2020-08-07 10:27:09,074:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807034501, 201
+2020-08-07 10:27:09,240:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807040004, 201
+2020-08-07 10:27:09,337:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807044501, 201
+2020-08-07 10:30:11,439:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-07 10:30:11,446:INFO:Sorting Backups from backup list
+2020-08-07 10:30:11,654:CRITICAL:ERROR Unable to Restore Backups: 409, Conflict
+2020-08-07 10:39:36,428:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-07 10:39:36,433:INFO:Sorting Backups from backup list
+2020-08-07 10:39:36,529:CRITICAL:ERROR Unable to Restore Backups: 409, Conflict
+2020-08-07 10:53:54,528:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-07 10:53:54,531:INFO:Sorting Backups from backup list
+2020-08-07 10:53:54,769:CRITICAL:ERROR Unable to Restore Backups: 409, Conflict
