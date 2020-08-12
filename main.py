@@ -5,7 +5,7 @@ import os
 
 def main():
     parser = argparse.ArgumentParser(description='Executes Drills in Openshift Environment with Velero Operator')
-    parser.add_argument('-vd', '--vdrill', help='Perform Drill', type=str, choices=['fo', 'fote', 'sw', 'sb'],
+    parser.add_argument('-vd', '--vdrill', help='Perform Drill', type=str, choices=['fo', 'fote', 'fb', 'sw', 'sb'],
                         required=True, dest='velero_drill')
     parser.add_argument('-vs', '--vschedule', help='Schedule to Restore', type=str, required=True,
                         dest='velero_schedule_name')
@@ -17,30 +17,21 @@ def main():
 
     argenvs = [args.pr_url, args.dr_url, args.pr_token, args.dr_token]
     envs = ['PR_URL', 'DR_URL', 'PR_TOKEN', 'DR_TOKEN']
-    for env in envs:
-        os.environ[env] = ""
 
     for idx, argenv in enumerate(argenvs):
         if argenv:
             os.environ[envs[idx]] = argenv
 
-    print(argenvs)
-    print(f"This is PR Token {os.environ.get('PR_TOKEN')}")
-
     if args.velero_drill == 'fo':
         drills.fail_over(schedule=args.velero_schedule_name)
-
-    if args.velero_drill == 'fote':
+    elif args.velero_drill == 'fote':
         drills.failover_test_excercise(schedule=args.velero_schedule_name)
-
-    if args.velero_drill == 'so':
+    elif args.velero_drill == 'fb':
+        drills.fall_back()
+    elif args.velero_drill == 'so':
         drills.switch_over()
-
-    if args.velero_drill == 'sb':
+    elif args.velero_drill == 'sb':
         drills.switch_back()
-
-    print(args)
-    print(args.velero_drill)
 
 
 if __name__ == "__main__":

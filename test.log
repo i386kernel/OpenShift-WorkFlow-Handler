@@ -1,17 +1,157 @@
-2020-08-07 10:27:08,595:INFO:GET Backups Successfully Triggerred - Status Code: 200
-2020-08-07 10:27:08,596:INFO:Sorting Backups from backup list
-2020-08-07 10:27:08,695:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807020001, 201
-2020-08-07 10:27:08,799:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807024501, 201
-2020-08-07 10:27:08,932:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807030001, 201
-2020-08-07 10:27:09,074:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807034501, 201
-2020-08-07 10:27:09,240:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807040004, 201
-2020-08-07 10:27:09,337:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200807044501, 201
-2020-08-07 10:30:11,439:INFO:GET Backups Successfully Triggerred - Status Code: 200
-2020-08-07 10:30:11,446:INFO:Sorting Backups from backup list
-2020-08-07 10:30:11,654:CRITICAL:ERROR Unable to Restore Backups: 409, Conflict
-2020-08-07 10:39:36,428:INFO:GET Backups Successfully Triggerred - Status Code: 200
-2020-08-07 10:39:36,433:INFO:Sorting Backups from backup list
-2020-08-07 10:39:36,529:CRITICAL:ERROR Unable to Restore Backups: 409, Conflict
-2020-08-07 10:53:54,528:INFO:GET Backups Successfully Triggerred - Status Code: 200
-2020-08-07 10:53:54,531:INFO:Sorting Backups from backup list
-2020-08-07 10:53:54,769:CRITICAL:ERROR Unable to Restore Backups: 409, Conflict
+2020-08-12 16:02:37,125:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-01
+2020-08-12 16:02:37,324:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:02:37,326:INFO:Sorting Backups from backup list
+2020-08-12 16:02:37,424:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200812090003, 201
+2020-08-12 16:02:37,510:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200812094503, 201
+2020-08-12 16:02:37,602:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200812100003, 201
+2020-08-12 16:02:37,812:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:14:57,255:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:14:57,866:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:14:57,868:INFO:Sorting Backups from backup list
+2020-08-12 16:14:58,079:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812070005, 201
+2020-08-12 16:14:58,193:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812074503, 201
+2020-08-12 16:14:58,319:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812080003, 201
+2020-08-12 16:14:58,748:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812084504, 201
+2020-08-12 16:14:58,907:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812090004, 201
+2020-08-12 16:14:59,078:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812094504, 201
+2020-08-12 16:14:59,272:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812100003, 201
+2020-08-12 16:14:59,638:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:16:06,837:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:16:07,008:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:16:07,010:INFO:Sorting Backups from backup list
+2020-08-12 16:16:07,167:CRITICAL:ERROR Unable to Restore Backups: 409, Conflict
+2020-08-12 16:16:07,272:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:16:32,434:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:16:32,563:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:16:32,566:INFO:Sorting Backups from backup list
+2020-08-12 16:16:32,654:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812070005, 201
+2020-08-12 16:16:32,778:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812074503, 201
+2020-08-12 16:16:32,914:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812080003, 201
+2020-08-12 16:16:33,068:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812084504, 201
+2020-08-12 16:16:33,222:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812090004, 201
+2020-08-12 16:16:33,425:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812094504, 201
+2020-08-12 16:16:33,617:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812100003, 201
+2020-08-12 16:16:33,796:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:17:19,581:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:17:19,723:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:17:19,727:INFO:Sorting Backups from backup list
+2020-08-12 16:17:19,883:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812070005, 201
+2020-08-12 16:17:20,136:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812074503, 201
+2020-08-12 16:17:20,230:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812080003, 201
+2020-08-12 16:17:20,344:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812084504, 201
+2020-08-12 16:17:20,568:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812090004, 201
+2020-08-12 16:17:20,703:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812094504, 201
+2020-08-12 16:17:21,193:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812100003, 201
+2020-08-12 16:17:21,441:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812104504, 201
+2020-08-12 16:17:21,611:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:26:00,323:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:26:16,182:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:26:17,961:INFO:Sorting Backups from backup list
+2020-08-12 16:26:18,055:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812080003, 201
+2020-08-12 16:26:18,135:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812084504, 201
+2020-08-12 16:26:18,224:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812090004, 201
+2020-08-12 16:26:18,318:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812094504, 201
+2020-08-12 16:26:18,432:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812100003, 201
+2020-08-12 16:26:18,581:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812104504, 201
+2020-08-12 16:28:20,705:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:33:16,152:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:33:16,287:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:33:16,291:INFO:Sorting Backups from backup list
+2020-08-12 16:33:16,398:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812080003, 201
+2020-08-12 16:33:16,479:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812084504, 201
+2020-08-12 16:33:16,564:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812090004, 201
+2020-08-12 16:33:16,776:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812094504, 201
+2020-08-12 16:33:16,953:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812100003, 201
+2020-08-12 16:33:17,085:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812104504, 201
+2020-08-12 16:33:17,209:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812110005, 201
+2020-08-12 16:33:17,290:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:36:58,941:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:36:59,172:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:36:59,175:INFO:Sorting Backups from backup list
+2020-08-12 16:36:59,308:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812080003, 201
+2020-08-12 16:36:59,433:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812084504, 201
+2020-08-12 16:36:59,542:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812090004, 201
+2020-08-12 16:36:59,690:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812094504, 201
+2020-08-12 16:36:59,814:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812100003, 201
+2020-08-12 16:36:59,896:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812104504, 201
+2020-08-12 16:36:59,995:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812110005, 201
+2020-08-12 16:37:00,141:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:45:15,234:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:45:15,440:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:45:15,443:INFO:Sorting Backups from backup list
+2020-08-12 16:45:15,543:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812080003, 201
+2020-08-12 16:45:15,627:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812084504, 201
+2020-08-12 16:45:15,717:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812090004, 201
+2020-08-12 16:45:15,842:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812094504, 201
+2020-08-12 16:45:15,953:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812100003, 201
+2020-08-12 16:45:16,103:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812104504, 201
+2020-08-12 16:45:16,185:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812110005, 201
+2020-08-12 16:45:16,315:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 16:55:06,646:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 16:55:06,959:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 16:55:06,962:INFO:Sorting Backups from backup list
+2020-08-12 16:55:07,056:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812080003, 201
+2020-08-12 16:55:07,139:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812084504, 201
+2020-08-12 16:55:07,270:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812090004, 201
+2020-08-12 16:55:07,367:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812094504, 201
+2020-08-12 16:55:07,451:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812100003, 201
+2020-08-12 16:55:07,530:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812104504, 201
+2020-08-12 16:55:07,646:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812110005, 201
+2020-08-12 16:55:07,742:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 19:41:18,937:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 19:41:19,064:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 19:41:19,065:INFO:Sorting Backups from backup list
+2020-08-12 19:41:19,147:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812110005, 201
+2020-08-12 19:41:19,225:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812114503, 201
+2020-08-12 19:41:19,315:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812120004, 201
+2020-08-12 19:41:19,457:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812124504, 201
+2020-08-12 19:41:19,603:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812130004, 201
+2020-08-12 19:41:19,757:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812134504, 201
+2020-08-12 19:41:20,191:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812140004, 201
+2020-08-12 19:41:20,316:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 22:48:09,058:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 22:48:09,571:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 22:48:09,573:INFO:Sorting Backups from backup list
+2020-08-12 22:48:09,907:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812140004, 201
+2020-08-12 22:48:10,043:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812144504, 201
+2020-08-12 22:48:10,146:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812150005, 201
+2020-08-12 22:48:10,255:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812154504, 201
+2020-08-12 22:48:10,381:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812160004, 201
+2020-08-12 22:48:10,537:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812164504, 201
+2020-08-12 22:48:10,692:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812170006, 201
+2020-08-12 22:48:10,855:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 22:59:41,250:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 22:59:41,389:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 22:59:41,390:INFO:Sorting Backups from backup list
+2020-08-12 22:59:41,557:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812140004, 201
+2020-08-12 22:59:41,680:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812144504, 201
+2020-08-12 22:59:41,770:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812150005, 201
+2020-08-12 22:59:41,871:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812154504, 201
+2020-08-12 22:59:42,012:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812160004, 201
+2020-08-12 22:59:42,104:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812164504, 201
+2020-08-12 22:59:42,333:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812170006, 201
+2020-08-12 22:59:42,444:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 23:17:31,775:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 23:17:31,946:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 23:17:31,947:INFO:Sorting Backups from backup list
+2020-08-12 23:17:32,061:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812140004, 201
+2020-08-12 23:17:32,219:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812144504, 201
+2020-08-12 23:17:32,314:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812150005, 201
+2020-08-12 23:17:32,460:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812154504, 201
+2020-08-12 23:17:32,885:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812160004, 201
+2020-08-12 23:17:33,084:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812164504, 201
+2020-08-12 23:17:33,381:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812170006, 201
+2020-08-12 23:17:33,542:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812174504, 201
+2020-08-12 23:17:33,723:INFO:GET Pod status successfully retrieved: 200
+2020-08-12 23:18:35,563:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-12 23:18:35,732:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-12 23:18:35,734:INFO:Sorting Backups from backup list
+2020-08-12 23:18:35,868:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812140004, 201
+2020-08-12 23:18:35,982:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812144504, 201
+2020-08-12 23:18:36,079:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812150005, 201
+2020-08-12 23:18:36,178:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812154504, 201
+2020-08-12 23:18:36,327:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812160004, 201
+2020-08-12 23:18:36,440:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812164504, 201
+2020-08-12 23:18:36,569:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812170006, 201
+2020-08-12 23:18:36,662:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200812174504, 201
+2020-08-12 23:18:36,763:INFO:GET Pod status successfully retrieved: 200

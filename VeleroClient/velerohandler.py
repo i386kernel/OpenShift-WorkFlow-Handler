@@ -2,12 +2,13 @@ import sys
 from OpenShiftClient.openshifthandler import *
 
 
-class VeleroHandler(OpenShiftHandler):
+class VeleroHandler(OpenshiftHandler):
     def __init__(self) -> None:
         super().__init__()
         self.all_backups = []
+        self.protected_namespaces = []
 
-    def get_backups(self, baseurl: str, headers: dict, schedule: str) -> None:
+    def get_backups(self, schedule: str) -> None:
         """Gets all scheduled backups
        :arg
         baseurl => Openshift Base URL, headers => http Headers
@@ -15,7 +16,7 @@ class VeleroHandler(OpenShiftHandler):
         None
        """
         try:
-            response = requests.get(baseurl + Endpoints.VELERO_BACKUP, headers=headers, verify=False, timeout=10)
+            response = requests.get(self.base_url + Endpoints.VELERO_BACKUP, headers=self.header, verify=False, timeout=10)
             if not response.ok:
                 logger.critical(f"ERROR Unable to Retrieve Backups: {response.status_code}, {response.reason}")
                 return
@@ -25,6 +26,8 @@ class VeleroHandler(OpenShiftHandler):
                     if (backup['metadata']['labels']['velero.io/schedule-name'] == schedule) and (
                             backup['status']['phase']) == 'Completed':
                         self.all_backups.append(backup['metadata']['name'])
+                        if not self.protected_namespaces:
+                            self.protected_namespaces = backup['spec']['includedNamespaces'].copy()
                 except KeyError:
                     pass
         except Exception as e:
@@ -42,17 +45,16 @@ class VeleroHandler(OpenShiftHandler):
         None
        """
         drbackuplist = self.all_backups.copy()
-        drbackuplist.sort(key=lambda so_backup: so_backup.split("-")[-1])
+        drbackuplist.sort(key=lambda sort_backup: sort_backup.split("-")[-1])
         return drbackuplist
 
-    def restore_scheduled_backups(self, baseurl: str, headers: dict, restore_obj: dict) -> dict or None:
+    def restore_scheduled_backups(self, restore_obj: dict) -> None:
         """Restores sorted backups
          :arg
             baseurl => Openshift Base URL, headers => http Headers, restoreobj => Post Body
          :returns
             None
         """
-
         if not self.sort_backups:
             print("There are no scheduled backups available!!!")
             return
@@ -61,7 +63,7 @@ class VeleroHandler(OpenShiftHandler):
             restore_obj['metadata']['name'] = f"ro-restored-{backup}"
             restore_obj['spec']['backupName'] = backup
             try:
-                response = requests.post(baseurl + Endpoints.VELERO_RESTORE, headers=headers,
+                response = requests.post(self.base_url + Endpoints.VELERO_RESTORE, headers=self.header,
                                          verify=False, json=restore_obj, timeout=10)
                 if not response.ok:
                     logger.critical(f"ERROR Unable to Restore Backups: {response.status_code}, {response.reason}")
@@ -75,23 +77,21 @@ class VeleroHandler(OpenShiftHandler):
                 sys.exit(1)
         return None
 
-    @staticmethod
-    def get_restores(baseurl: str, headers: dict) -> dict or None:
+    def get_restores(self) -> dict or None:
         """Gets performed restores
           :arg
             baseurl => Openshift Base URL, headers => http Headers
           :returns
             None
         """
-        response = requests.get(baseurl + Endpoints.VELERO_RESTORE, headers=headers, verify=False, timeout=10)
+        response = requests.get(self.base_url + Endpoints.VELERO_RESTORE, headers=self.header, verify=False, timeout=10)
         if not response.ok:
             logger.critical(f"ERROR Unable to Get Restores: {response.status_code}, {response.reason}")
             return
         logger.info(f"RESTORES, {response.status_code}")
         return response.json()
 
-    @staticmethod
-    def get_storage_location(baseurl: str, headers: dict) -> dict or None:
+    def get_storage_location(self) -> dict or None:
         """Gets storage locations
           :arg
             baseurl => Openshift Base URL, headers => http Headers
@@ -99,7 +99,7 @@ class VeleroHandler(OpenShiftHandler):
             Dict or None
         """
         try:
-            response = requests.get(baseurl + Endpoints.VELERO_STORAGE, headers=headers, verify=False, timeout=10)
+            response = requests.get(self.base_url + Endpoints.VELERO_STORAGE, headers=self.header, verify=False, timeout=10)
             if not response.ok:
                 logger.critical(f"ERROR Unable to Retrieve Storage Location: {response.status_code}, {response.reason}")
                 return
@@ -108,20 +108,44 @@ class VeleroHandler(OpenShiftHandler):
         except Exception as e:
             print(f"Error occoured while getting storage location: {e}")
 
-    def change_storage_mode(self):
+    def change_storage_access(self):
         """Gets performed restores
           :arg
             baseurl => Openshift Base URL, headers => http Headers
           :returns
             None
         """
-        pass
+        try:
+            response = requests.post(self.base_url + Endpoints.VELERO_STORAGE, headers=self.header, verify=False,
+                                     timeout=10)
+            if not response.ok:
+                logger.critical(f"ERROR Unable to Retrieve Storage Location: {response.status_code}, {response.reason}")
+                return
+            logger.info(f"{response.status_code}, {response.reason} Storage Location GET Triggerred")
+            return response.json()
+        except Exception as e:
+            print(f"Error occoured while changing the storage location: {e}")
 
-    def get_velero_recovered_pod_status(self, baseurl: str, headers: str) -> dict:
+    def recovered_pod_status(self) -> dict:
         """Gets status of recovered Pods
             :arg
               baseurl => Openshift Base URL, headers => http Headers
             :returns
               None
         """
+        return self.get_pod_status(namespaces=self.protected_namespaces)
+
+
+class VeleroPRHandler(VeleroHandler):
+    def __init__(self):
+        super().__init__()
+        self.base_url = self.pr_url
+        self.header = self.pr_token_header
+
+
+class VeleroDRHandler(VeleroHandler):
+    def __init__(self):
+        super().__init__()
+        self.base_url = self.dr_url
+        self.header = self.dr_token_header
 

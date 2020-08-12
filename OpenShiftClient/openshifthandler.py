@@ -1,20 +1,16 @@
 import enum
 import logging
+# from logging.handlers import RotatingFileHandler
 import requests
 import urllib3
 
-# Presets for Logging and urllib3 disable warnings
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-# logger.setLevel(logging.DEBUG)
-# logger.setLevel(logging.CRITICAL)
-# logger.setLevel(logging.ERROR)
 formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(message)s')
 file_handler = logging.FileHandler("test.log")
 file_handler.setFormatter(formatter)
+# rhandler = RotatingFileHandler("/var/test.log", maxBytes=1024, backupCount=1)
 logger.addHandler(file_handler)
-
-# Disable cert warnings
 urllib3.disable_warnings()
 
 # Initialize Enums
@@ -24,9 +20,8 @@ class Endpoints(str, enum.Enum):
     VELERO_RESTORE = "/apis/velero.io/v1/namespaces/velero/restores/"
     VELERO_STORAGE = "/apis/velero.io/v1/namespaces/velero/backupstoragelocations/"
 
-# Check this Diff
 
-class OpenShiftHandler:
+class OpenshiftHandler:
 
     # def __init__(self) -> None:
     #     self.pr_url = os.getenv("PR_URL")
@@ -35,10 +30,8 @@ class OpenShiftHandler:
     #     self.dr_token = os.getenv("DR_TOKEN")
     #     self.pr_token_header = {"Authorization": "Bearer " + self.pr_token}
     #     self.dr_token_header = {"Authorization": "Bearer " + self.dr_token}
-    #     def set_pr_token_header(self) -> dict:
-    #       return {'Authorization': 'Bearer ' + self.pr_token}
-    #     def set_dr_token_header(self) -> dict:
-    #       return {'Authorization': 'Bearer ' + self.dr_token}
+    #     self.base_url = ""
+    #     self.header = {}
 
     def __init__(self) -> None:
         self.pr_token = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNTYmFBWDRtRklVZmVxMzhFUXZNV1BsTmw2RXNHZ0wwQUR2TGJWTkNtME0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJjbHVzdGVyYWRtaW4tdG9rZW4tbnhwNW4iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiY2x1c3RlcmFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZDQxYjkwZjctNDMwMS00YTE5LWIxMTItZjRhNTFmMGNhZGI3Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmNsdXN0ZXJhZG1pbiJ9.bZPZ10Vt_qsXoA2Ai1RImmyULiGP5UTHFCAYcqeixv6md0G90kwMyTe68VyrdTJT9Ks2urslU88U0vVhWrB2vYTZBF68Sip5uLe3f_yVjAFXdfeFwY2lFj8_tCi0CxWmOW9cZJ7r5E9gaTTVUij-CXobxCWsaukNvNZU9u4Hss6FPaLrq0addoVBPjO1QR_SspcV0ZtSm_1-VXKR0vn4cdrf-_Ifhswu1uB2iWDdpfjRZTCh6w0bUkphfQaqQwGI9tKHWhUuOe7D8h9j9aEzQoDQxoVYwHhOvv2pdJfPTcm3cydr0Rxtv3VrcMkHg7jk0QrhZtGaIsUwJaxWqApKUQ"
@@ -47,10 +40,45 @@ class OpenShiftHandler:
         self.dr_url = "https://192.168.8.53:6443"
         self.pr_token_header = {"Authorization": "Bearer " + self.pr_token}
         self.dr_token_header = {"Authorization": "Bearer " + self.dr_token}
+        self.base_url = ""
+        self.header = {}
 
-    def get_pod_status(self, baseurl: str, headers: dict, namespaces: list) -> dict or None:
+    def get_pod_status(self, namespaces: list) -> dict or None:
+        container_status = {}
         for namespace in namespaces:
             podstatus = f"/api/v1/namespaces/{namespace}/pods/"
-            response = requests.get(baseurl + podstatus, headers=headers, verify=False, timeout=10)
-            return response.json()
+            try:
+                response = requests.get(self.base_url + podstatus, headers=self.header, verify=False, timeout=10)
+                if not response.ok:
+                    logger.error(f"ERROR Unable to get Pod Status: {response.status_code}, {response.reason}")
+                    return None
+                logger.info(f"GET Pod status successfully retrieved: {response.status_code}")
+                for pod in response.json()['items']:
+                    try:
+                        for status in pod['status']['containerStatuses']:
+                            for k, v in status['state'].items():
+                                container_status.update({"name": status['name'], "status": {k: v}})
+                    except KeyError:
+                        pass
+                        return None
+            except Exception as e:
+                print("Error Occurred while getting Pod Status: ", e)
+                logger.debug(f"Error Occurred while getting Pod Status: , {e}")
+                return None
+        return container_status
+
+
+class OpenshiftPRHandler(OpenshiftHandler):
+    def __init__(self):
+        super().__init__()
+        self.base_url = self.pr_url
+        self.header = self.pr_token_header
+
+
+class OpenshiftDRHandler(OpenshiftHandler):
+    def __init__(self):
+        super().__init__()
+        self.base_url = self.dr_url
+        self.header = self.dr_token_header
+
 
