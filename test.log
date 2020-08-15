@@ -81,3 +81,37 @@
 2020-08-15 16:14:48,860:INFO:GET Pod status successfully retrieved: 200
 2020-08-15 16:15:29,782:INFO:Delete Triggerred Successfully, Deleting Work-Loadsfote-nginx-example
 2020-08-15 16:15:29,992:INFO:Deleted work-loads post FOTE in DR
+2020-08-15 18:03:09,591:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-15 18:03:10,030:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-15 18:03:10,032:INFO:Sorting Backups from backup list
+2020-08-15 18:03:10,311:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815090005, (201, 'Created')
+2020-08-15 18:03:10,682:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815094505, (201, 'Created')
+2020-08-15 18:03:10,998:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815100005, (201, 'Created')
+2020-08-15 18:03:11,225:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815104505, (201, 'Created')
+2020-08-15 18:03:11,500:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815110007, (201, 'Created')
+2020-08-15 18:03:11,728:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815114505, (201, 'Created')
+2020-08-15 18:03:11,920:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815120005, (201, 'Created')
+2020-08-15 18:03:12,099:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:03:15,336:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:03:18,803:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:03:22,021:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:03:25,118:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:03:49,141:INFO:Delete Triggerred Successfully, Deleting Work-Loadsfote-nginx-example
+2020-08-15 18:03:49,408:INFO:Deleted work-loads post FOTE in DR
+2020-08-15 18:06:43,926:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-15 18:06:44,053:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-15 18:06:44,055:INFO:Sorting Backups from backup list
+2020-08-15 18:06:44,177:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815090005, (201, 'Created')
+2020-08-15 18:06:44,271:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815094505, (201, 'Created')
+2020-08-15 18:06:44,383:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815100005, (201, 'Created')
+2020-08-15 18:06:44,604:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815104505, (201, 'Created')
+2020-08-15 18:06:44,773:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815110007, (201, 'Created')
+2020-08-15 18:06:44,935:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815114505, (201, 'Created')
+2020-08-15 18:06:45,329:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200815120005, (201, 'Created')
+2020-08-15 18:06:45,607:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:06:48,689:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:06:51,760:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:06:55,435:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:06:58,608:INFO:GET Pod status successfully retrieved: 200
+2020-08-15 18:08:42,061:INFO:Delete Triggerred Successfully, Deleting Work-Loadsfote-nginx-example
+2020-08-15 18:08:43,244:INFO:Deleted work-loads post FOTE in DR

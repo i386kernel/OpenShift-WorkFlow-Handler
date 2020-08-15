@@ -1,5 +1,6 @@
 from VeleroClient.velerohandler import *
 from OpenShiftClient.openshifthandler import *
+import time
 
 
 def pre_checks():
@@ -76,14 +77,17 @@ def failover_test_excercise(schedule: str) -> None:
             return
 
     # Deployed Work-load Status Check
-    podstat = (fote.recovered_pod_status())
-    print(f"Protected Work-Loads:")
-    for k, v in podstat['status'].items():
-        if k == 'waiting':
-            print(f" Pod Name: {podstat['name']} \n Pod Current Status: {k} \n Reason: {v['reason']} \n "
-                  f"Message: {v['message']}")
-        else:
-            print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k}")
+    for i in range(5):
+        podstat = (fote.recovered_pod_status())
+        print(f"Protected Work-Loads:")
+        for k, v in podstat['status'].items():
+            if k == 'waiting':
+                print(f" Pod Name: {podstat['name']} \n Pod Current Status: {k} \n Reason: {v['reason']} \n "
+                      f"Message: {v['message']}")
+            else:
+                print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k}")
+        time.sleep(3)
+        i += 1
     print("Work-Loads are Deployed in DR, please examine them,")
 
     # Prompt to delete Deployed Work-Loads
