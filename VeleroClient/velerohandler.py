@@ -16,7 +16,8 @@ class VeleroHandler(OpenshiftHandler):
         None
        """
         try:
-            response = requests.get(self.base_url + Endpoints.VELERO_BACKUP, headers=self.header, verify=False, timeout=10)
+            response = requests.get(self.base_url + Endpoints.VELERO_BACKUP, headers=self.header, verify=False,
+                                    timeout=10)
             if not response.ok:
                 logger.critical(f"ERROR Unable to Retrieve Backups: {response.status_code}, {response.reason}")
                 return
@@ -48,7 +49,7 @@ class VeleroHandler(OpenshiftHandler):
         drbackuplist.sort(key=lambda sort_backup: sort_backup.split("-")[-1])
         return drbackuplist
 
-    def restore_scheduled_backups(self, restore_obj: dict) -> None:
+    def restore_scheduled_backups(self, restore_manifest: dict) -> (int, str) or None:
         """Restores sorted backups
          :arg
             baseurl => Openshift Base URL, headers => http Headers, restoreobj => Post Body
@@ -58,24 +59,18 @@ class VeleroHandler(OpenshiftHandler):
         if not self.sort_backups:
             print("There are no scheduled backups available!!!")
             return
-        logger.info("Sorting Backups from backup list")
-        for backup in self.sort_backups:
-            restore_obj['metadata']['name'] = f"ro-restored-{backup}"
-            restore_obj['spec']['backupName'] = backup
-            try:
-                response = requests.post(self.base_url + Endpoints.VELERO_RESTORE, headers=self.header,
-                                         verify=False, json=restore_obj, timeout=10)
-                if not response.ok:
-                    logger.critical(f"ERROR Unable to Restore Backups: {response.status_code}, {response.reason}")
-                    print(f"ERROR...Unable to Restore Backups: {response.status_code}, {response.reason}")
-                    return
-                logger.info(f"RESTORE Successfully Triggerred ro-restored-{backup}, {response.status_code}")
-                print(f"RO-Restored.... {backup}")
-            except Exception as e:
-                print("Error While restoring Backups: ", e)
-                logger.debug(f"Error Occourred while restoring backups: {e}")
-                sys.exit(1)
-        return None
+        try:
+            response = requests.post(self.base_url + Endpoints.VELERO_RESTORE, headers=self.header,
+                                     verify=False, json=restore_manifest, timeout=10)
+            if not response.ok:
+                logger.critical(f"ERROR Unable to Restore Backups: {response.status_code}, {response.reason}")
+                print(f"ERROR...Unable to Restore Backups: {response.status_code}, {response.reason}")
+                return
+            return response.status_code, response.reason
+        except Exception as e:
+            print("Error While restoring Backups: ", e)
+            logger.debug(f"Error Occourred while restoring backups: {e}")
+            sys.exit(1)
 
     def get_restores(self) -> dict or None:
         """Gets performed restores
@@ -99,7 +94,8 @@ class VeleroHandler(OpenshiftHandler):
             Dict or None
         """
         try:
-            response = requests.get(self.base_url + Endpoints.VELERO_STORAGE, headers=self.header, verify=False, timeout=10)
+            response = requests.get(self.base_url + Endpoints.VELERO_STORAGE, headers=self.header, verify=False,
+                                    timeout=10)
             if not response.ok:
                 logger.critical(f"ERROR Unable to Retrieve Storage Location: {response.status_code}, {response.reason}")
                 return
@@ -148,4 +144,3 @@ class VeleroDRHandler(VeleroHandler):
         super().__init__()
         self.base_url = self.dr_url
         self.header = self.dr_token_header
-

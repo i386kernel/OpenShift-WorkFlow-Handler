@@ -4,7 +4,6 @@ from OpenShiftClient.openshifthandler import *
 
 def pre_checks():
     # Check for the Velero Operator in DR
-
     # Check to see if the Env's are present
     # Check the provided schedule is available
     # Check the status of work-loads
@@ -12,7 +11,7 @@ def pre_checks():
 
 
 def fail_over(schedule: str) -> None:
-    fo_restore_obj = {
+    fo_restore_manifest = {
         "apiVersion": "velero.io/v1",
         "kind": "Restore",
         "metadata": {
@@ -24,13 +23,28 @@ def fail_over(schedule: str) -> None:
         }
     }
     logger.info(f"Performing Fail Over on Schedule : {schedule}")
+    # Instantiate Velero Object
     fo = VeleroDRHandler()
+
+    # Trigger Get Backups
     fo.get_backups(schedule=schedule)
-    fo.restore_scheduled_backups(restore_obj=fo_restore_obj)
+
+    # Trigger Restoration
+    fo.restore_scheduled_backups(restore_manifest=fo_restore_manifest)
+
+    # Work-Load Status Check
+    podstat = (fo.recovered_pod_status())
+    print(f"Protected Work-Loads:")
+    for k, v in podstat['status'].items():
+        if k == 'waiting':
+            print(f" Pod Name: {podstat['name']} \n Pod Current Status: {k} \n Reason: {v['reason']} \n "
+                  f"Message: {v['message']}")
+        else:
+            print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k}")
 
 
 def failover_test_excercise(schedule: str) -> None:
-    fote_restore_obj = {
+    fote_restore_manifest = {
         "apiVersion": "velero.io/v1",
         "kind": "Restore",
         "metadata": {
@@ -38,20 +52,50 @@ def failover_test_excercise(schedule: str) -> None:
             "namespace": "velero"
         },
         "spec": {
-            "backupName": ""
-        }
+            "backupName": "",
+            "namespaceMapping": {
+            }
+        },
     }
+
+    # Begin FOTE
     logger.info(f"Performing Fail Over Test Excercise on Schedule : {schedule}")
     fote = VeleroDRHandler()
     fote.get_backups(schedule=schedule)
-    fote.restore_scheduled_backups(restore_obj=fote_restore_obj)
+    logger.info("Sorting Backups from backup list")
+    for backup in fote.sort_backups:
+        fote_restore_manifest['metadata']['name'] = f"ro-restored-{backup}"
+        fote_restore_manifest.update({'spec': {"backupName": f"{backup}", 'namespaceMapping': {namespace:
+                                               f"fote-{namespace}" for namespace in fote.protected_namespaces}}})
+        try:
+            sc, sr = fote.restore_scheduled_backups(restore_manifest=fote_restore_manifest)
+            logger.info(f"RESTORE Successfully Triggerred ro-restored-{backup}, {sc, sr}")
+            print(f"RO-Restored.... {backup}")
+        except Exception as e:
+            print(f"Failed restoring scheduled backups: {e}")
+            return
+
+    # Deployed Work-load Status Check
     podstat = (fote.recovered_pod_status())
+    print(f"Protected Work-Loads:")
     for k, v in podstat['status'].items():
         if k == 'waiting':
-            print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k} \n Reason: {v['reason']} \n "
+            print(f" Pod Name: {podstat['name']} \n Pod Current Status: {k} \n Reason: {v['reason']} \n "
                   f"Message: {v['message']}")
         else:
             print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k}")
+    print("Work-Loads are Deployed in DR, please examine them,")
+
+    # Prompt to delete Deployed Work-Loads
+    workloads = True
+    while workloads:
+        workloaddelete = input("Once Done!!!, Please Enter 'delete' to delete all the created DR Work-Loads: ")
+        if workloaddelete.lower() == 'delete':
+            for namespace in fote.protected_namespaces:
+                fote.delete_namespaces(namespaces=[f"fote-{namespace}"])
+            workloads = False
+            print("Deleted Scheduled Work-Loads in DR")
+            logger.info("Deleted work-loads post FOTE in DR")
 
 
 def fall_back():
@@ -87,9 +131,10 @@ def switch_back():
 def testget():
     test = VeleroDRHandler()
     test.get_backups(schedule="sched-backup-01")
-    print(test.all_backups)
+    return test.all_backups
 
 # testget()
+
 
 #
 # def testget():
