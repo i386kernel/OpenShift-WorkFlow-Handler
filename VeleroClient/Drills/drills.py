@@ -23,6 +23,7 @@ def fail_over(schedule: str) -> None:
             "backupName": ""
         }
     }
+    # Begin FO
     logger.info(f"Performing Fail Over on Schedule : {schedule}")
     # Instantiate Velero Object
     fo = VeleroDRHandler()
@@ -31,6 +32,16 @@ def fail_over(schedule: str) -> None:
     fo.get_backups(schedule=schedule)
 
     # Trigger Restoration
+    for backup in fo.sort_backups:
+        fo_restore_manifest['metadata']['name'] = f"ro-restored-{backup}"
+        fo_restore_manifest.update({'spec': {"backupName": f"{backup}"}})
+        try:
+            sc, sr = fo.restore_scheduled_backups(restore_manifest=fo_restore_manifest)
+            logger.info(f"RESTORE Successfully Triggerred ro-restored-{backup}, {sc, sr}")
+            print(f"RO-Restored.... {backup}")
+        except Exception as e:
+            print(f"Failed restoring scheduled backups: {e}")
+            return
     fo.restore_scheduled_backups(restore_manifest=fo_restore_manifest)
 
     # Work-Load Status Check
@@ -139,16 +150,3 @@ def testget():
 
 # testget()
 
-
-#
-# def testget():
-#     test = VeleroHandler()
-#     test.get_backups(test.dr_url, test.dr_token_header)
-#     print(test.getallbackups)
-#     test.sort_backups()
-#     print(f"Sorted Backups: {test.sortedbackups}")
-#     print(test.get_restores(test.dr_url, test.dr_token_header))
-#     print(test.get_storage_location(test.dr_url, test.dr_token_header))
-#
-# testget()
-#
