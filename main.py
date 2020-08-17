@@ -1,6 +1,5 @@
 import argparse
 from VeleroClient.Drills import drills
-import os
 from DBDataEncoder import dbdataencoder
 
 
@@ -38,10 +37,7 @@ def main():
     elif args.command == 'setup':
         dbdataencoder.insert_cred_data(pr_url=args.pr_url, dr_url=args.dr_url, pr_token=args.pr_token,
                                        dr_token=args.dr_token)
-        argenvs = [args.pr_url, args.dr_url, args.pr_token, args.dr_token]
-        envs = ['PR_URL', 'DR_URL', 'PR_TOKEN', 'DR_TOKEN']
-        for idx, argenv in enumerate(argenvs):
-            os.environ[envs[idx]] = argenv
+
 
 
 if __name__ == "__main__":

@@ -1,71 +1,46 @@
-2020-08-16 22:48:24,315:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-03
-2020-08-16 22:50:10,783:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-03
-2020-08-16 22:50:10,783:DEBUG:Error Occourred during Retrieving Backups: , unsupported operand type(s) for +: 'NoneType' and 'Endpoints'
-2020-08-16 22:51:39,573:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-03
-2020-08-16 22:51:39,574:DEBUG:Error Occourred during Retrieving Backups: , unsupported operand type(s) for +: 'NoneType' and 'Endpoints'
-2020-08-16 22:54:03,476:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-03
-2020-08-16 22:54:41,315:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-03
-2020-08-16 22:54:41,490:INFO:GET Backups Successfully Triggerred - Status Code: 200
-2020-08-16 22:54:41,491:INFO:Sorting Backups from backup list
-2020-08-16 22:54:41,584:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816140006, (201, 'Created')
-2020-08-16 22:54:41,698:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816141005, (201, 'Created')
-2020-08-16 22:54:41,806:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816142005, (201, 'Created')
-2020-08-16 22:54:41,895:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816143005, (201, 'Created')
-2020-08-16 22:54:41,974:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816144005, (201, 'Created')
-2020-08-16 22:54:42,056:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816145005, (201, 'Created')
-2020-08-16 22:54:42,157:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816150007, (201, 'Created')
-2020-08-16 22:54:42,270:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816151005, (201, 'Created')
-2020-08-16 22:54:42,448:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816152005, (201, 'Created')
-2020-08-16 22:54:42,531:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816153005, (201, 'Created')
-2020-08-16 22:54:42,684:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816154005, (201, 'Created')
-2020-08-16 22:54:42,878:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816155005, (201, 'Created')
-2020-08-16 22:54:43,134:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816160005, (201, 'Created')
-2020-08-16 22:54:43,332:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816161005, (201, 'Created')
-2020-08-16 22:54:43,423:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816162005, (201, 'Created')
-2020-08-16 22:54:43,535:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816163005, (201, 'Created')
-2020-08-16 22:54:43,643:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816164005, (201, 'Created')
-2020-08-16 22:54:43,727:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816165005, (201, 'Created')
-2020-08-16 22:54:43,813:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816170010, (201, 'Created')
-2020-08-16 22:54:43,890:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816171005, (201, 'Created')
-2020-08-16 22:54:44,024:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816172005, (201, 'Created')
-2020-08-16 22:54:44,125:INFO:GET Pod status successfully retrieved: 200
-2020-08-16 22:54:47,270:INFO:GET Pod status successfully retrieved: 200
-2020-08-16 22:54:50,351:INFO:GET Pod status successfully retrieved: 200
-2020-08-16 22:54:53,515:INFO:GET Pod status successfully retrieved: 200
-2020-08-16 22:54:56,845:INFO:GET Pod status successfully retrieved: 200
-2020-08-16 22:55:11,670:INFO:Delete Triggerred Successfully, Deleting Work-Loadsfote-nginx-example
-2020-08-16 22:55:12,157:INFO:Deleted work-loads post FOTE in DR
-2020-08-17 00:24:07,289:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-03
-2020-08-17 00:24:07,881:INFO:GET Backups Successfully Triggerred - Status Code: 200
-2020-08-17 00:24:07,882:INFO:Sorting Backups from backup list
-2020-08-17 00:24:08,224:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816150007, (201, 'Created')
-2020-08-17 00:24:08,383:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816151005, (201, 'Created')
-2020-08-17 00:24:08,684:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816152005, (201, 'Created')
-2020-08-17 00:24:08,853:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816153005, (201, 'Created')
-2020-08-17 00:24:09,087:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816154005, (201, 'Created')
-2020-08-17 00:24:09,312:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816155005, (201, 'Created')
-2020-08-17 00:24:09,522:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816160005, (201, 'Created')
-2020-08-17 00:24:09,817:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816161005, (201, 'Created')
-2020-08-17 00:24:10,193:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816162005, (201, 'Created')
-2020-08-17 00:24:10,902:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816163005, (201, 'Created')
-2020-08-17 00:24:11,311:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816164005, (201, 'Created')
-2020-08-17 00:24:11,543:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816165005, (201, 'Created')
-2020-08-17 00:24:11,743:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816170010, (201, 'Created')
-2020-08-17 00:24:11,956:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816171005, (201, 'Created')
-2020-08-17 00:24:12,193:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816172005, (201, 'Created')
-2020-08-17 00:24:12,444:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816173005, (201, 'Created')
-2020-08-17 00:24:12,744:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816174005, (201, 'Created')
-2020-08-17 00:24:12,924:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816175005, (201, 'Created')
-2020-08-17 00:24:13,086:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816180006, (201, 'Created')
-2020-08-17 00:24:13,254:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816181005, (201, 'Created')
-2020-08-17 00:24:13,480:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816182005, (201, 'Created')
-2020-08-17 00:24:13,629:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816183005, (201, 'Created')
-2020-08-17 00:24:13,947:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816184005, (201, 'Created')
-2020-08-17 00:24:14,242:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-03-20200816185005, (201, 'Created')
-2020-08-17 00:24:14,337:INFO:GET Pod status successfully retrieved: 200
-2020-08-17 00:24:17,450:INFO:GET Pod status successfully retrieved: 200
-2020-08-17 00:24:20,648:INFO:GET Pod status successfully retrieved: 200
-2020-08-17 00:24:23,826:INFO:GET Pod status successfully retrieved: 200
-2020-08-17 00:24:27,278:INFO:GET Pod status successfully retrieved: 200
-2020-08-17 00:24:33,756:INFO:Delete Triggerred Successfully, Deleting Work-Loadsfote-nginx-example
-2020-08-17 00:24:34,061:INFO:Deleted work-loads post FOTE in DR
+2020-08-17 01:05:39,446:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-01
+2020-08-17 01:05:39,629:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-17 01:05:39,635:INFO:Sorting Backups from backup list
+2020-08-17 01:05:39,752:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200816180006, (201, 'Created')
+2020-08-17 01:05:39,845:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200816184505, (201, 'Created')
+2020-08-17 01:05:39,948:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200816190005, (201, 'Created')
+2020-08-17 01:05:40,051:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:05:43,301:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:05:46,382:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:05:49,530:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:05:52,598:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:06:31,743:INFO:Delete Triggerred Successfully, Deleting Work-Loadsfote-nginx-example
+2020-08-17 01:06:32,074:INFO:Deleted work-loads post FOTE in DR
+2020-08-17 01:15:09,454:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-01
+2020-08-17 01:15:09,564:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-17 01:15:09,569:INFO:Sorting Backups from backup list
+2020-08-17 01:15:09,673:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200816180006, (201, 'Created')
+2020-08-17 01:15:09,781:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200816184505, (201, 'Created')
+2020-08-17 01:15:09,870:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-01-20200816190005, (201, 'Created')
+2020-08-17 01:15:09,980:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:15:13,121:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:15:16,273:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:15:19,354:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:15:22,479:INFO:GET Pod status successfully retrieved: 200
+
+
+2020-08-17 01:15:52,907:INFO:Performing Fail Over Test Excercise on Schedule : sched-backup-02
+2020-08-17 01:15:53,309:INFO:GET Backups Successfully Triggerred - Status Code: 200
+2020-08-17 01:15:53,314:INFO:Sorting Backups from backup list
+2020-08-17 01:15:53,613:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200816160006, (201, 'Created')
+2020-08-17 01:15:53,947:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200816164506, (201, 'Created')
+2020-08-17 01:15:54,202:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200816170010, (201, 'Created')
+2020-08-17 01:15:54,488:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200816174505, (201, 'Created')
+2020-08-17 01:15:54,671:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200816180006, (201, 'Created')
+2020-08-17 01:15:54,877:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200816184505, (201, 'Created')
+2020-08-17 01:15:55,013:INFO:RESTORE Successfully Triggerred ro-restored-sched-backup-02-20200816190008, (201, 'Created')
+2020-08-17 01:15:55,589:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:15:58,666:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:16:01,903:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:16:05,016:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:16:08,082:INFO:GET Pod status successfully retrieved: 200
+2020-08-17 01:16:17,769:INFO:Delete Triggerred Successfully, Deleting Work-Loadsfote-nginx-example
+2020-08-17 01:16:18,035:INFO:Deleted work-loads post FOTE in DR
+2020-08-17 01:16:22,105:INFO:Delete Triggerred Successfully, Deleting Work-Loadsfote-nginx-example
+2020-08-17 01:16:22,176:ERROR:ERROR Unable to delete Namespace: 409, Conflict
+2020-08-17 01:16:22,176:INFO:Deleted work-loads post FOTE in DR
