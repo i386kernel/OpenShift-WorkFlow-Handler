@@ -1,14 +1,20 @@
 from VeleroClient.velerohandler import *
 from OpenShiftClient.openshifthandler import *
 import time
+import sys
 
 
 def pre_checks():
-    # Check for the Velero Operator in DR
-    # Check to see if the Env's are present
-    # Check the provided schedule is available
-    # Check the status of work-loads
-    pass
+    # Check for Velero PR Operator
+    vpr = VeleroPRHandler()
+
+    # Check for Velero DR Operator
+    vdr = VeleroDRHandler()
+
+    if not (vpr.velero_conn_check() and vdr.velero_conn_check()):
+        print("Initial Setup Failed, Please Verify URL's and Authentication Tokens")
+        sys.exit(1)
+    print("Setup Completed Successfully")
 
 
 def fail_over(schedule: str) -> None:
@@ -90,15 +96,19 @@ def failover_test_excercise(schedule: str) -> None:
     # Deployed Work-load Status Check
     for i in range(5):
         podstat = (fote.recovered_pod_status())
+        print(podstat)
         print(f"Protected Work-Loads:")
-        for k, v in podstat['status'].items():
-            if k == 'waiting':
-                print(f" Pod Name: {podstat['name']} \n Pod Current Status: {k} \n Reason: {v['reason']} \n "
-                      f"Message: {v['message']}")
-            else:
-                print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k}")
-        time.sleep(3)
-        i += 1
+        try:
+            for k, v in podstat['status'].items():
+                if k == 'waiting':
+                    print(f" Pod Name: {podstat['name']} \n Pod Current Status: {k} \n Reason: {v['reason']} \n "
+                          f"Message: {v['message']}")
+                else:
+                    print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k}")
+                time.sleep(3)
+                i += 1
+        except KeyError:
+            pass
     print("Work-Loads are Deployed in DR, please examine them,")
 
     # Prompt to delete Deployed Work-Loads

@@ -1,6 +1,8 @@
 import argparse
+import os
 from VeleroClient.Drills import drills
 from DBDataEncoder import dbdataencoder
+import presets
 
 
 def main():
@@ -22,6 +24,7 @@ def main():
     setup_parser.add_argument('-dt', '--drtoken', help='DR Service Token', type=str, required=True, dest='dr_token')
     args = parser.parse_args()
 
+    # Execute appropriate drills
     if args.command == 'execute':
         if args.velero_drill == 'fo':
             drills.fail_over(schedule=args.velero_schedule_name)
@@ -34,10 +37,17 @@ def main():
         elif args.velero_drill == 'sb':
             drills.switch_back()
 
+    # Initiate Setup
     elif args.command == 'setup':
-        dbdataencoder.insert_cred_data(pr_url=args.pr_url, dr_url=args.dr_url, pr_token=args.pr_token,
-                                       dr_token=args.dr_token)
-
+        # if os.path.exists(presets.DATA_PATH + "/opworkflowmanager.db"):
+        #     os.remove(presets.DATA_PATH+"/opworkflowmanager.db")
+        #     dbdataencoder.insert_cred_data(pr_url=args.pr_url, dr_url=args.dr_url, pr_token=args.pr_token,
+        #                                    dr_token=args.dr_token)
+        #     drills.pre_checks()
+        # else:
+            dbdataencoder.insert_cred_data(pr_url=args.pr_url, dr_url=args.dr_url, pr_token=args.pr_token,
+                                           dr_token=args.dr_token)
+            drills.pre_checks()
 
 
 if __name__ == "__main__":

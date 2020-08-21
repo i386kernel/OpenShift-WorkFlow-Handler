@@ -38,7 +38,7 @@ class VeleroHandler(OpenshiftHandler):
         return None
 
     @property
-    def sort_backups(self) -> list:
+    def sort_backups(self) -> list or None:
         """Sorts the Backups
        :arg
         None
@@ -47,6 +47,8 @@ class VeleroHandler(OpenshiftHandler):
        """
         drbackuplist = self.all_backups.copy()
         drbackuplist.sort(key=lambda sort_backup: sort_backup.split("-")[-1])
+        if not drbackuplist:
+            raise LookupError("Unable to find the given Schedule")
         return drbackuplist
 
     def restore_scheduled_backups(self, restore_manifest: dict) -> (int, str) or None:
@@ -130,6 +132,27 @@ class VeleroHandler(OpenshiftHandler):
               None
         """
         return self.get_pod_status(namespaces=self.protected_namespaces)
+
+    def velero_conn_check(self) -> bool:
+        """Checks if it can reach Velero Instance"""
+        try:
+            response = requests.get(self.base_url + Endpoints.VELERO_GET_ALL, headers=self.header, verify=False,
+                                    timeout=10)
+            if not response.ok:
+                print(f"Unable to Communicate or Authenticate with {self.base_url}{Endpoints.VELERO_GET_ALL}, "
+                      f"{response.status_code}")
+                logger.debug(f"Error Unable to communicate or Authenticate with {self.base_url}"
+                             f"{Endpoints.VELERO_GET_ALL}"
+                             f"{response.status_code}")
+                return False
+            print(f"Successfully able to connect and authenticate with {self.base_url}{Endpoints.VELERO_GET_ALL}, "
+                  f"{response.status_code}")
+            logger.info(f"Successfully able to authenticate with {self.base_url}{Endpoints.VELERO_GET_ALL}"
+                        f"{response.status_code}")
+            return True
+        except Exception as e:
+            print(f"Error occured while trying to communicate with {self.base_url}")
+            logger.debug(f"Error occured while trying to communicate with {self.base_url}: {e}")
 
 
 class VeleroPRHandler(VeleroHandler):
