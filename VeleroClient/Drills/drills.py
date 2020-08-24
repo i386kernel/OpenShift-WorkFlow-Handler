@@ -95,8 +95,7 @@ def failover_test_excercise(schedule: str) -> None:
 
     # Deployed Work-load Status Check
     for i in range(5):
-        podstat = (fote.recovered_pod_status())
-        print(podstat)
+        podstat = (fote.recovered_pod_status(namespaceprefix="fote-"))
         print(f"Protected Work-Loads:")
         try:
             for k, v in podstat['status'].items():
@@ -105,10 +104,10 @@ def failover_test_excercise(schedule: str) -> None:
                           f"Message: {v['message']}")
                 else:
                     print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k}")
-                time.sleep(3)
-                i += 1
         except KeyError:
             pass
+        time.sleep(3)
+        i += 1
     print("Work-Loads are Deployed in DR, please examine them,")
 
     # Prompt to delete Deployed Work-Loads

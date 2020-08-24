@@ -61,10 +61,10 @@ class OpenshiftHandler:
         self.base_url = ""
         self.header = {}
 
-    def get_pod_status(self, namespaces: list) -> dict or None:
+    def get_pod_status(self, namespaces: list,  namespaceprefix: str = "", ) -> dict or None:
         container_status = {}
         for namespace in namespaces:
-            podstatus = f"/api/v1/namespaces/{namespace}/pods"
+            podstatus = f"/api/v1/namespaces/{namespaceprefix}{namespace}/pods"
             try:
                 response = requests.get(self.base_url + podstatus, headers=self.header, verify=False, timeout=10)
                 if not response.ok:
@@ -78,7 +78,6 @@ class OpenshiftHandler:
                                 container_status.update({"name": status['name'], "status": {k: v}})
                     except KeyError:
                         pass
-                        return None
             except Exception as e:
                 print("Error Occurred while getting Pod Status: ", e)
                 logger.debug(f"Error Occurred while getting Pod Status: , {e}")
@@ -87,7 +86,7 @@ class OpenshiftHandler:
 
     def delete_namespaces(self, namespaces: list) -> dict or None:
         for ns in namespaces:
-            namespace = f"/api/v1/namespaces/fote-{ns}"
+            namespace = f"/api/v1/namespaces/{ns}"
             try:
                 logger.info(f"Delete Triggerred Successfully, Deleting Namespace: {ns}")
                 response = requests.delete(self.base_url + namespace, headers=self.header, verify=False, timeout=10)

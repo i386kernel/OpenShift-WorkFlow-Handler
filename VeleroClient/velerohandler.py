@@ -91,7 +91,7 @@ class VeleroHandler(OpenshiftHandler):
     def get_storage_location(self) -> dict or None:
         """Gets storage locations
           :arg
-            baseurl => Openshift Base URL, headers => http Headers
+            baseurl -> Openshift Base URL, headers -> http Headers
           :returns
             Dict or None
         """
@@ -124,14 +124,9 @@ class VeleroHandler(OpenshiftHandler):
         except Exception as e:
             print(f"Error occoured while changing the storage location: {e}")
 
-    def recovered_pod_status(self) -> dict:
-        """Gets status of recovered Pods
-            :arg
-              baseurl => Openshift Base URL, headers => http Headers
-            :returns
-              None
-        """
-        return self.get_pod_status(namespaces=self.protected_namespaces)
+    def recovered_pod_status(self, namespaceprefix: str = "") -> dict:
+        """Gets status of recovered Pods"""
+        return self.get_pod_status(namespaces=self.protected_namespaces, namespaceprefix=namespaceprefix)
 
     def velero_conn_check(self) -> bool:
         """Checks if it can reach Velero Instance"""
