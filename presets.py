@@ -4,8 +4,8 @@ import sys
 
 
 # Data Path for DB and Log Files
-# DATA_PATH = r"/var/lib/opworkflowmanager/"
-DATA_PATH = ""
+DATA_PATH = r"/var/lib/opworkflowmanager/"
+# DATA_PATH = ""
 
 # Logger Config
 logger = logging.getLogger(__name__)

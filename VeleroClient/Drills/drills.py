@@ -4,12 +4,13 @@ import time
 import sys
 
 
-def pre_checks():
+def pre_checks(secret):
     # Check for Velero PR Operator
-    vpr = VeleroPRHandler()
+    vpr = VeleroPRHandler(secret=secret)
+    logger.info("Precheck Triggerred")
 
     # Check for Velero DR Operator
-    vdr = VeleroDRHandler()
+    vdr = VeleroDRHandler(secret=secret)
 
     if not (vpr.velero_conn_check() and vdr.velero_conn_check()):
         print("Initial Setup Failed, Please Verify URL's and Authentication Tokens")
@@ -17,7 +18,7 @@ def pre_checks():
     print("Setup Completed Successfully")
 
 
-def fail_over(schedule: str) -> None:
+def fail_over(schedule: str, secret: str) -> None:
     fo_restore_manifest = {
         "apiVersion": "velero.io/v1",
         "kind": "Restore",
@@ -32,7 +33,7 @@ def fail_over(schedule: str) -> None:
     # Begin FO
     logger.info(f"Performing Fail Over on Schedule : {schedule}")
     # Instantiate Velero Object
-    fo = VeleroDRHandler()
+    fo = VeleroDRHandler(secret=secret)
 
     # Trigger Get Backups
     fo.get_backups(schedule=schedule)
@@ -48,10 +49,9 @@ def fail_over(schedule: str) -> None:
         except Exception as e:
             print(f"Failed restoring scheduled backups: {e}")
             return
-    fo.restore_scheduled_backups(restore_manifest=fo_restore_manifest)
 
     # Work-Load Status Check
-    podstat = (fo.recovered_pod_status())
+    podstat = (fo.recovered_pod_status(namespaces=[namespace for namespace in fo.protected_namespaces]))
     print(f"Protected Work-Loads:")
     for k, v in podstat['status'].items():
         if k == 'waiting':
@@ -61,7 +61,7 @@ def fail_over(schedule: str) -> None:
             print(f"Pod Name: {podstat['name']}, \n Pod Current Status: {k}")
 
 
-def failover_test_excercise(schedule: str) -> None:
+def failover_test_excercise(schedule: str, secret: str) -> None:
     fote_restore_manifest = {
         "apiVersion": "velero.io/v1",
         "kind": "Restore",
@@ -78,7 +78,7 @@ def failover_test_excercise(schedule: str) -> None:
 
     # Begin FOTE
     logger.info(f"Performing Fail Over Test Excercise on Schedule : {schedule}")
-    fote = VeleroDRHandler()
+    fote = VeleroDRHandler(secret=secret)
     fote.get_backups(schedule=schedule)
     logger.info("Sorting Backups from backup list")
     for backup in fote.sort_backups:
@@ -95,7 +95,7 @@ def failover_test_excercise(schedule: str) -> None:
 
     # Deployed Work-load Status Check
     for i in range(5):
-        podstat = (fote.recovered_pod_status(namespaceprefix="fote-"))
+        podstat = (fote.recovered_pod_status(namespaces=['fote-'+namespace for namespace in fote.protected_namespaces]))
         print(f"Protected Work-Loads:")
         try:
             for k, v in podstat['status'].items():
@@ -115,8 +115,7 @@ def failover_test_excercise(schedule: str) -> None:
     while workloads:
         workloaddelete = input("Once Done!!!, Please Enter 'delete' to delete all the created DR Work-Loads: ")
         if workloaddelete.lower() == 'delete':
-            for namespace in fote.protected_namespaces:
-                fote.delete_namespaces(namespaces=[f"fote-{namespace}"])
+            fote.delete_namespaces(namespaces=['fote-'+namespace for namespace in fote.protected_namespaces])
             workloads = False
             print("Deleted Scheduled Work-Loads in DR")
             logger.info("Deleted work-loads post FOTE in DR")
@@ -152,10 +151,10 @@ def switch_back():
     pass
 
 
-def testget():
-    test = VeleroDRHandler()
-    test.get_backups(schedule="sched-backup-01")
-    return test.all_backups
+# def testget():
+#     test = VeleroDRHandler()
+#     test.get_backups(schedule="sched-backup-01")
+#     return test.all_backups
 
 # testget()
 

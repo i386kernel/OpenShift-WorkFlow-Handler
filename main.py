@@ -1,13 +1,13 @@
 import argparse
 import os
 from VeleroClient.Drills import drills
-from DBDataEncoder import dbdataencoder
+from DBDataEncrypter import dbdataencrypter
 import presets
 
 
 def main():
     parser = argparse.ArgumentParser(description='Executes Drills in Openshift Environment with Velero Operator')
-    subparser = parser.add_subparsers(dest="command")
+    subparser = parser.add_subparsers(dest="command", required=True)
 
     # Sub-Parser for Execute Operations
     execute_parser = subparser.add_parser('execute', help='Execute Drills for Openshift')
@@ -15,6 +15,8 @@ def main():
                                 choices=['fo', 'fote', 'fb', 'sw', 'sb'], required=True, dest='velero_drill')
     execute_parser.add_argument('-vs', '--vschedule', help='Schedule to Restore', type=str, required=True,
                                 dest='velero_schedule_name')
+    execute_parser.add_argument('-s', '--secret', help='Provide Secret Key to Perform a Drill', type=str, required=True,
+                                dest='secret_key')
 
     # Initial Setup of Openshift Work-Flow Container Sub-Parser
     setup_parser = subparser.add_parser('setup', help='Setup Initial OpenShift Work-Flow Container')
@@ -27,9 +29,9 @@ def main():
     # Execute appropriate drills
     if args.command == 'execute':
         if args.velero_drill == 'fo':
-            drills.fail_over(schedule=args.velero_schedule_name)
+            drills.fail_over(schedule=args.velero_schedule_name, secret=args.secret_key)
         elif args.velero_drill == 'fote':
-            drills.failover_test_excercise(schedule=args.velero_schedule_name)
+            drills.failover_test_excercise(schedule=args.velero_schedule_name, secret=args.secret_key)
         elif args.velero_drill == 'fb':
             drills.fall_back()
         elif args.velero_drill == 'so':
@@ -39,15 +41,15 @@ def main():
 
     # Initiate Setup
     elif args.command == 'setup':
-        # if os.path.exists(presets.DATA_PATH + "/opworkflowmanager.db"):
-        #     os.remove(presets.DATA_PATH+"/opworkflowmanager.db")
-        #     dbdataencoder.insert_cred_data(pr_url=args.pr_url, dr_url=args.dr_url, pr_token=args.pr_token,
-        #                                    dr_token=args.dr_token)
-        #     drills.pre_checks()
-        # else:
-            dbdataencoder.insert_cred_data(pr_url=args.pr_url, dr_url=args.dr_url, pr_token=args.pr_token,
-                                           dr_token=args.dr_token)
-            drills.pre_checks()
+        if os.path.exists(presets.DATA_PATH + "/opworkflowmanager.db"):
+            os.remove(presets.DATA_PATH+"/opworkflowmanager.db")
+            dbdataencrypter.insert_cred_data(pr_url=args.pr_url, dr_url=args.dr_url, pr_token=args.pr_token,
+                                             dr_token=args.dr_token)
+            drills.pre_checks(secret=dbdataencrypter.secretkey.decode())
+        else:
+            dbdataencrypter.insert_cred_data(pr_url=args.pr_url, dr_url=args.dr_url, pr_token=args.pr_token,
+                                             dr_token=args.dr_token)
+            drills.pre_checks(secret=dbdataencrypter.secretkey.decode())
 
 
 if __name__ == "__main__":

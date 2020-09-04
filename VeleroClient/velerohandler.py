@@ -3,8 +3,8 @@ from OpenShiftClient.openshifthandler import *
 
 
 class VeleroHandler(OpenshiftHandler):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, secret) -> None:
+        super().__init__(secret=secret)
         self.all_backups = []
         self.protected_namespaces = []
 
@@ -48,7 +48,8 @@ class VeleroHandler(OpenshiftHandler):
         drbackuplist = self.all_backups.copy()
         drbackuplist.sort(key=lambda sort_backup: sort_backup.split("-")[-1])
         if not drbackuplist:
-            raise LookupError("Unable to find the given Schedule")
+            print("Unable to find the given Schedule, please examine the given schedule")
+            sys.exit(1)
         return drbackuplist
 
     def restore_scheduled_backups(self, restore_manifest: dict) -> (int, str) or None:
@@ -124,9 +125,9 @@ class VeleroHandler(OpenshiftHandler):
         except Exception as e:
             print(f"Error occoured while changing the storage location: {e}")
 
-    def recovered_pod_status(self, namespaceprefix: str = "") -> dict:
+    def recovered_pod_status(self, namespaces: list) -> dict:
         """Gets status of recovered Pods"""
-        return self.get_pod_status(namespaces=self.protected_namespaces, namespaceprefix=namespaceprefix)
+        return self.get_pod_status(namespaces=namespaces)
 
     def velero_conn_check(self) -> bool:
         """Checks if it can reach Velero Instance"""
@@ -141,9 +142,9 @@ class VeleroHandler(OpenshiftHandler):
                              f"{response.status_code}")
                 return False
             print(f"Successfully able to connect and authenticate with {self.base_url}{Endpoints.VELERO_GET_ALL}, "
-                  f"{response.status_code}")
+                  f", {response.status_code}")
             logger.info(f"Successfully able to authenticate with {self.base_url}{Endpoints.VELERO_GET_ALL}"
-                        f"{response.status_code}")
+                        f", {response.status_code}")
             return True
         except Exception as e:
             print(f"Error occured while trying to communicate with {self.base_url}")
@@ -151,14 +152,14 @@ class VeleroHandler(OpenshiftHandler):
 
 
 class VeleroPRHandler(VeleroHandler):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, secret):
+        super().__init__(secret=secret)
         self.base_url = self.pr_url
         self.header = self.pr_token_header
 
 
 class VeleroDRHandler(VeleroHandler):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, secret):
+        super().__init__(secret=secret)
         self.base_url = self.dr_url
         self.header = self.dr_token_header
