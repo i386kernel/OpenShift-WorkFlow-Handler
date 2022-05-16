@@ -1,6 +1,6 @@
 FROM python:3.8-slim
 
-LABEL Developer="Lakshya Nanjangud <lakshya.nanjangud@in.ibm.com>"
+LABEL Developer="Lakshya Nanjangud"
 
 LABEL Maintainer="Openshift Team - Resiliency Orchestration"
 
